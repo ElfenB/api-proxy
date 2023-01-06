@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import express, { Express, Request, Response } from 'express';
-import proxy from 'express-http-proxy';
+import { fetchUrl } from './server.utils';
 
 dotenv.config();
 
@@ -17,4 +17,14 @@ app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });
 
-app.use('/proxy', proxy('www.google.de'));
+app.get('/proxy/:url', async (req: Request, res: Response) => {
+  const url = req.params.url;
+  const params = req.query;
+
+  // console.info('url', url);
+  // console.info('params', params);
+
+  const repl = await fetchUrl(url, params);
+
+  res.send(repl);
+});
