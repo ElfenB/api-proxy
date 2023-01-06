@@ -1,3 +1,4 @@
+import cors from 'cors';
 import dotenv from 'dotenv';
 import express, { Express, Request, Response } from 'express';
 import { fetchUrl } from './server.utils';
@@ -7,7 +8,9 @@ dotenv.config();
 const app: Express = express();
 const port = process.env.PORT;
 
-console.log(port);
+console.log(`\nServer started on port ${port}\nEnjoy!\n`);
+
+app.use(cors());
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Express + TypeScript Server');
@@ -21,8 +24,8 @@ app.get('/proxy/:url', async (req: Request, res: Response) => {
   const url = req.params.url;
   const params = req.query;
 
-  // console.info('url', url);
-  // console.info('params', params);
+  console.info('url', url);
+  console.info('params', params);
 
   const repl = await fetchUrl(url, params);
 
