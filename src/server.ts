@@ -21,11 +21,14 @@ app.listen(port, () => {
 app.get('/proxy/:url', async (req: Request, res: Response) => {
   const url = req.params.url;
   const params = req.query;
+  const headers = params.headers;
+  // Reset this on the params
+  params.headers = undefined;
 
-  console.log(`Received request for url ${url} and params ${JSON.stringify(params)}`)
+  console.log(`Received request for url ${url} and params ${JSON.stringify(params)}`);
 
-  const repl = await fetchUrl(url, params);
-  console.log(`Sent back data for url ${url}`)
+  const repl = await fetchUrl(url, params, headers);
+  console.log(`Sent back data for url ${url}`);
 
   res.send(repl);
 });
