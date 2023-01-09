@@ -1,6 +1,6 @@
 version: "3.8"
 services:
-  frontend:
+  proxy:
     container_name: api-proxy
     build: .
     restart: always
