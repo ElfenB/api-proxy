@@ -69,3 +69,4 @@ return res.data;
 ```
 
 As in the example above, cookies can be send as a query param, within the headers object.
+The headers can also be send stringified with `headers: JSON.stringify({Cookie: 'key="value"'}),`.
